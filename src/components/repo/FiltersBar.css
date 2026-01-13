@@ -1,0 +1,132 @@
+.filters-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 1.5rem;
+    border-radius: 16px;
+    margin-bottom: 2rem;
+    gap: 2rem;
+}
+
+.filters-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    flex-grow: 1;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+
+
+.filter-group label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.filter-group input[type="text"] {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    padding: 0.5rem 0.75rem;
+    color: var(--text-primary);
+    width: 250px;
+    transition: all 0.2s;
+}
+
+.filter-group input[type="text"]:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.language-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    max-width: 400px;
+}
+
+.lang-chip {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 100px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    color: var(--text-secondary);
+    transition: all 0.2s;
+}
+
+.lang-chip:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.lang-chip.active {
+    background: var(--accent-primary);
+    border-color: var(--accent-primary);
+    color: white;
+}
+
+
+
+.sort-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 200px;
+}
+
+.select-wrapper {
+    position: relative;
+}
+
+.select-wrapper select {
+    width: 100%;
+    appearance: none;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    padding: 0.5rem 2.5rem 0.5rem 0.75rem;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.select-wrapper select:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+}
+
+.select-icon {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+    pointer-events: none;
+}
+
+@media (max-width: 1024px) {
+    .filters-bar {
+        flex-direction: column;
+    }
+
+    .sort-section {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .filter-group input[type="text"] {
+        width: 100%;
+    }
+
+
+}
