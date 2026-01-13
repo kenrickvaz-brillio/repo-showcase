@@ -50,11 +50,46 @@ export async function fetchRepoReadme(owner: string, repo: string): Promise<stri
     return null;
 }
 
+function extractSummaryFromMarkdown(markdown: string): string {
+    // Remove HTML comments
+    let text = markdown.replace(/<!--[\s\S]*?-->/g, '');
+
+    // Remove images
+    text = text.replace(/!\[.*?\]\(.*?\)/g, '');
+
+    // Remove links but keep text
+    text = text.replace(/\[([^\]]+)\]\(.*?\)/g, '$1');
+
+    // Remove headers
+    text = text.replace(/#{1,6}\s/g, '');
+
+    // Remove code blocks
+    text = text.replace(/```[\s\S]*?```/g, '');
+    text = text.replace(/`.*?`/g, '');
+
+    // Remove blockquotes
+    text = text.replace(/>\s/g, '');
+
+    // Clean up whitespace
+    text = text.replace(/\s+/g, ' ').trim();
+
+    // Take first 150 characters
+    if (text.length > 150) {
+        return text.substring(0, 150).trim() + '...';
+    }
+
+    return text;
+}
+
 export function enrichRepoWithReadme(repo: Repo, readme: string | null): Repo {
     if (!readme) return repo;
+
+    const summary = extractSummaryFromMarkdown(readme);
+
     return {
         ...repo,
         readme,
+        description: summary || repo.description, // Use generated summary if available, otherwise keep original
         extractedLinks: extractLinksFromMarkdown(readme)
     };
 }

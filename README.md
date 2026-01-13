@@ -2,6 +2,8 @@
 
 A modern, high-performance portfolio application designed to showcase GitHub repositories. Built with React and TypeScript, it fetches real-time data from the GitHub API, automatically extracts demo links from READMEs, and presents projects in a premium, glassmorphism-styled interface.
 
+**[Live Demo](https://witty-coast-00f387c1e.6.azurestaticapps.net)**
+
 ## 🚀 Features
 
 - **Live GitHub Integration**: Fetches public repositories directly from the GitHub REST API.
