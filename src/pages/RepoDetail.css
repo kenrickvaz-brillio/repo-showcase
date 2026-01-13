@@ -370,5 +370,26 @@
 
     .detail-links {
         flex-direction: column;
+        width: 100%;
+    }
+
+    .link-btn {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-stats {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .stat-item {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .readme-content {
+        padding: 1rem;
     }
 }

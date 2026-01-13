@@ -69,3 +69,17 @@
         justify-content: space-between;
     }
 }
+
+@media (max-width: 480px) {
+    .logo h1 {
+        font-size: 1.2rem;
+    }
+
+    .profile-link span {
+        display: none;
+    }
+
+    .profile-link {
+        padding: 0.5rem;
+    }
+}

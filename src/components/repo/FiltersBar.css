@@ -124,9 +124,15 @@
 }
 
 @media (max-width: 768px) {
+    .filters-bar {
+        padding: 1rem;
+    }
+
     .filter-group input[type="text"] {
         width: 100%;
     }
 
-
+    .language-chips {
+        max-width: 100%;
+    }
 }
