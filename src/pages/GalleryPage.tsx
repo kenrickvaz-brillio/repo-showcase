@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import type { Repo, RepoFilters, SortOption } from '../types/repo';
 import { RepoCard } from '../components/repo/RepoCard';
 import { FiltersBar } from '../components/repo/FiltersBar';
@@ -14,6 +15,21 @@ interface GalleryPageProps {
     setSort: (sort: SortOption) => void;
     loading: boolean;
 }
+
+const container = {
+    hidden: { opacity: 0 },
+    show: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.1
+        }
+    }
+};
+
+const item = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0 }
+};
 
 export const GalleryPage: React.FC<GalleryPageProps> = ({
     repos,
@@ -112,11 +128,20 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({
                     ))}
                 </div>
             ) : filteredAndSortedRepos.length > 0 ? (
-                <div className="repo-grid">
-                    {filteredAndSortedRepos.map(repo => (
-                        <RepoCard key={repo.id} repo={repo} onClick={handleRepoClick} />
-                    ))}
-                </div>
+                <motion.div
+                    className="repo-grid"
+                    variants={container}
+                    initial="hidden"
+                    animate="show"
+                >
+                    <AnimatePresence mode='popLayout'>
+                        {filteredAndSortedRepos.map(repo => (
+                            <motion.div key={repo.id} variants={item} layout>
+                                <RepoCard repo={repo} onClick={handleRepoClick} />
+                            </motion.div>
+                        ))}
+                    </AnimatePresence>
+                </motion.div>
             ) : (
                 <div className="empty-state glass">
                     <h3>No repositories found</h3>

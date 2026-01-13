@@ -1,5 +1,6 @@
 import React from 'react';
-import { Github, ExternalLink } from 'lucide-react';
+import { Github, ExternalLink, Sun, Moon } from 'lucide-react';
+import { useTheme } from '../../context/ThemeContext';
 import './Header.css';
 
 interface HeaderProps {
@@ -7,6 +8,8 @@ interface HeaderProps {
 }
 
 export const Header: React.FC<HeaderProps> = ({ username }) => {
+    const { theme, toggleTheme } = useTheme();
+
     return (
         <header className="header glass">
             <div className="container header-content">
@@ -16,6 +19,13 @@ export const Header: React.FC<HeaderProps> = ({ username }) => {
                 </div>
 
                 <div className="controls">
+                    <button
+                        className="theme-toggle"
+                        onClick={toggleTheme}
+                        title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+                    >
+                        {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+                    </button>
                     <a
                         href={`https://github.com/${username}`}
                         target="_blank"
