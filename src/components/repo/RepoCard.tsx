@@ -1,5 +1,5 @@
 import React from 'react';
-import { Star, GitFork, ExternalLink, BookOpen, Clock, Archive } from 'lucide-react';
+import { ExternalLink, BookOpen, Clock, Archive } from 'lucide-react';
 import type { Repo } from '../../types/repo';
 import { getPrimaryDemoLink } from '../../utils/linkExtractor';
 import { formatDistanceToNow } from 'date-fns';
@@ -23,6 +23,13 @@ export const RepoCard: React.FC<RepoCardProps> = ({ repo, onClick }) => {
                 <p className="repo-description">{repo.description || 'No description provided.'}</p>
             </div>
 
+            <div className="repo-topics">
+                {repo.topics.slice(0, 3).map(topic => (
+                    <span key={topic} className="topic-chip">{topic}</span>
+                ))}
+                {repo.topics.length > 3 && <span className="topic-more">+{repo.topics.length - 3}</span>}
+            </div>
+
             <div className="repo-meta">
                 {repo.language && (
                     <span className="language-pill">
@@ -30,17 +37,18 @@ export const RepoCard: React.FC<RepoCardProps> = ({ repo, onClick }) => {
                         {repo.language}
                     </span>
                 )}
-                <div className="repo-stats">
-                    <span title="Stars"><Star size={14} /> {repo.stargazers_count}</span>
-                    <span title="Forks"><GitFork size={14} /> {repo.forks_count}</span>
-                </div>
-            </div>
-
-            <div className="repo-topics">
-                {repo.topics.slice(0, 3).map(topic => (
-                    <span key={topic} className="topic-chip">{topic}</span>
-                ))}
-                {repo.topics.length > 3 && <span className="topic-more">+{repo.topics.length - 3}</span>}
+                {primaryDemo && (
+                    <a
+                        href={primaryDemo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="demo-link-inline"
+                        onClick={e => e.stopPropagation()}
+                    >
+                        <ExternalLink size={14} />
+                        <span>Live Demo</span>
+                    </a>
+                )}
             </div>
 
             <div className="repo-footer">
@@ -53,11 +61,6 @@ export const RepoCard: React.FC<RepoCardProps> = ({ repo, onClick }) => {
                     <a href={repo.html_url} target="_blank" rel="noopener noreferrer" className="action-btn" title="View on GitHub">
                         <Github size={16} />
                     </a>
-                    {primaryDemo && (
-                        <a href={primaryDemo} target="_blank" rel="noopener noreferrer" className="action-btn demo" title="View Demo">
-                            <ExternalLink size={16} />
-                        </a>
-                    )}
                     <button className="action-btn details" onClick={() => onClick(repo)} title="View Details">
                         <BookOpen size={16} />
                     </button>
