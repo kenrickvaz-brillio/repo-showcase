@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Github, ExternalLink, Sun, Moon } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
 import './Header.css';
@@ -13,10 +14,10 @@ export const Header: React.FC<HeaderProps> = ({ username }) => {
     return (
         <header className="header glass">
             <div className="container header-content">
-                <div className="logo">
+                <Link to="/" className="logo">
                     <Github size={32} className="logo-icon" />
                     <h1>Repo<span>Showcase</span></h1>
-                </div>
+                </Link>
 
                 <div className="controls">
                     <button
